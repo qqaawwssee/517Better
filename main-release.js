@@ -522,6 +522,9 @@ function for_main_website() {
             });
 
             btn.onclick = function () {
+                if (btn.style.height == "145px") {
+                    return;
+                }
                 let url = window.location.href;
                 let p = url.match(/[0-9]+\//g);
                 let p2 = url.match(/[A-Z]/g);
