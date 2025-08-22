@@ -4,6 +4,8 @@
 
 把`main-release.js`添加到`Tampermonkey`就可以了
 
+或者是[安装](https://raw.githubusercontent.com/qqaawwssee/517Better/refs/heads/main/main-release.js)
+
 在`Windows11 Edge Tampermonkey5.3.3`上测试正常，不保证其他浏览器不会出错
 
 目前未发现能造成危害的代码
