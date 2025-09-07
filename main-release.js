@@ -659,7 +659,7 @@ function fun() {
     console.log("517Coding better loading...");
     url = window.location.href;
 
-    if (url.substring(0, 22) == 'https://517coding.com/') for_no_www_website();     //可根据实际修改
+    if (url.substring(0, 22) == 'https://517coding.com/') for_no_www_website();     //可根据实际修改，不过有点难改，还是推荐带用www的，上面一堆代码用的都是www格式的
     else if (url.substring(0, 26) == 'https://www.517coding.com/') for_main_website();
     else if (url.substring(0, 30) == 'https://discuss.517coding.com/') for_discuss();
     else if (url.substring(0, 31) == 'https://training.517coding.com/') for_training();
@@ -670,3 +670,4 @@ function fun() {
 (function () {
     fun();
 })();
+
