@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         517Coding better Release!
 // @namespace    https://github.com/qqaawwssee/517Better
-// @version      0.1
+// @version      0.1.1
 // @description  517OJ 美化+工具拓展插件
 // @author       HUFT
 // @match        https://www.517coding.com/*
@@ -39,6 +39,7 @@ function logo() {
     padding-right: 10px;
     white-space: pre-wrap;
     width: 50px;
+    color: var(--color-text-1);
 }
 
 .index_right__7zJFP::before {
@@ -52,6 +53,7 @@ function logo() {
     padding-right: 10px;
     white-space: pre-wrap;
     width: 50px;
+    color: var(--color-text-1);
 }
             `);
         GM_registerMenuCommand("关闭517Coding Better Logo（将自动刷新）", () => {
@@ -77,7 +79,7 @@ var url;
 
 function add_css() {
     GM_addStyle(`
-    .arco-drawer {
+.arco-drawer {
     border-radius: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -221,7 +223,6 @@ pre .language-cpp {
     height: 26px;
     padding: 7px;
     transition: 0.2s;
-    fill: rgba(0, 0, 0, 0);
 }
 
 .gotowww2:hover {
@@ -428,6 +429,56 @@ pre .language-cpp {
 .problem_container__tWXAL .arco-row-justify-start .arco-col-20 {
     width: calc(100% - 70px) !important;
 }
+
+.arco-col.arco-col-4 a .arco-typography {
+    width: 200px;
+}
+.index_search-form-wrapper__YGOn5 + .arco-table.arco-table-size-default.arco-table-hover{
+@media (max-width: 1200px) {
+    th:nth-child(2) {
+        display: none;
+    }
+
+    td:nth-child(2) {
+        display: none;
+    }
+
+    th:nth-child(3) {
+        display: none;
+    }
+
+    td:nth-child(3) {
+        display: none;
+    }
+
+    /*
+th:nth-child(4){
+  display: none;
+}
+td:nth-child(4){
+  display: none;
+}
+th:nth-child(5){
+  display: none;
+}
+td:nth-child(5){
+  display: none;
+}
+*/
+    th:nth-child(6) {
+        display: none;
+    }
+
+    td:nth-child(6) {
+        display: none;
+    }
+
+    colgroup col {
+        width: unset !important;
+    }
+}
+    }
+.
     `)
 }
 
@@ -447,7 +498,8 @@ function for_main_website() {
 	<div>        <svg viewBox="0 0 24 24" class="arco-icon arco-icon-heart" style="
     height: 26px;
     width: 26px;
-" stroke-width="0" fill="rgb(0,0,0)">            <path xmlns="http://www.w3.org/2000/svg" d="M14 22.5L11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2L14 22.5zm1.839-5.5H21V8.103H7V17H12.161L14 19.298 15.839 17zM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1z"/>        </svg>    </div></div>`;
+    fill: var(--color-text-1);
+" stroke-width="0">            <path xmlns="http://www.w3.org/2000/svg" d="M14 22.5L11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2L14 22.5zm1.839-5.5H21V8.103H7V17H12.161L14 19.298 15.839 17zM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1z"/>        </svg>    </div></div>`;
         container1.insertAdjacentHTML('beforeend', div);
         var btn = document.getElementById("gotowww");
         btn.onclick = function () {
@@ -462,7 +514,9 @@ function for_main_website() {
 	<div>        <svg viewBox="0 0 24 24" class="arco-icon arco-icon-heart" style="
     height: 26px;
     width: 26px;
-">            <path xmlns="http://www.w3.org/2000/svg" d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>        </svg>    </div></div>`;
+">            <path xmlns="http://www.w3.org/2000/svg" d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="var(--color-text-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="
+    fill: none;
+"/>        </svg>    </div></div>`;
             container2.insertAdjacentHTML('beforeend', div);
             var btn = document.getElementById("gotowww22");
             btn.onclick = function () {
@@ -479,7 +533,7 @@ function for_main_website() {
 	<div>        <svg viewBox="0 0 28 28" class="arco-icon arco-icon-heart" style="
     height: 26px;
     width: 26px;
-">        <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0" fill="black" id="gotowww222a">简化</text> <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0" fill="black" id="gotowww222c">总结</text>   <path xmlns="http://www.w3.org/2000/svg" d="M 2.56 20.48 L 2.56 10.24 L 5.12 10.24 L 8.96 14.08 L 12.8 10.24 L 15.36 10.24 L 15.36 20.48 L 12.8 20.48 L 12.8 13.8624 L 8.96 17.7024 L 5.12 13.8624 L 5.12 20.48 L 2.56 20.48 M 20.48 10.24 L 24.32 10.24 L 24.32 15.36 L 27.52 15.36 L 22.4 21.12 L 17.28 15.36 L 20.48 15.36 L 20.48 10.24 Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: 0.2s" id="gotowww222b" >        </svg>    </div></div>`;
+">        <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0; color: var(--color-text-1)"id="gotowww222a">简化</text> <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0; color: var(--color-text-1)" id="gotowww222c">总结</text>   <path xmlns="http://www.w3.org/2000/svg" d="M 2.56 20.48 L 2.56 10.24 L 5.12 10.24 L 8.96 14.08 L 12.8 10.24 L 15.36 10.24 L 15.36 20.48 L 12.8 20.48 L 12.8 13.8624 L 8.96 17.7024 L 5.12 13.8624 L 5.12 20.48 L 2.56 20.48 M 20.48 10.24 L 24.32 10.24 L 24.32 15.36 L 27.52 15.36 L 22.4 21.12 L 17.28 15.36 L 20.48 15.36 L 20.48 10.24 Z" stroke="var(--color-text-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: 0.2s; fill: none;" id="gotowww222b">        </svg>    </div></div>`;
             container3.insertAdjacentHTML('beforeend', div);
             var btn = document.getElementById("gotowww222");
             var typee = 1;
@@ -522,25 +576,22 @@ function for_main_website() {
             });
 
             btn.onclick = function () {
-                if (btn.style.height == "145px") {
-                    return;
-                }
                 let url = window.location.href;
                 let p = url.match(/[0-9]+\//g);
                 let p2 = url.match(/[A-Z]/g);
-                p2[0][0] = (Number)(p2[0][0] - 'A');
+                //p2[0][0] = (Number)(p2[0][0] - 'A');
                 fetch("https://www.517coding.com/api/contests/" + p[0] + "problems/" + (p2[0].charCodeAt(0) - 65), { "headers": { "accept": "application/json, text/plain, */*", "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6", "authorization": "Bearer " + localStorage.getItem("token"), "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"Windows\"", "sec-fetch-dest": "empty", "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin" }, "referrer": "https://www.517coding.com/", "body": null, "method": "GET", "mode": "cors", "credentials": "include" }).then(res => res.json()).then(res => {
                     let o = '';
                     if (typee == 1) {                //详细的
-                        o += '#### ' + res.name;
+                        o += '#### [' + p2[0] + " - " + res.name + "](" + url + ")";
                         o += '\n\n##### 题目描述：\n\n' + res.statements[0].legend;
-                        if (res.statements[0].note != '') o += '\n\n##### 数据范围/提示：\n\n' + res.note;
+                        if (res.statements[0].note != '') o += '\n\n##### 数据范围/提示：\n\n' + res.statements[0].note;
                     }
                     else if (typee == 2) {
                         o += '### 题意：\n\n' + res.statements[0].legend;
                     }
                     else {
-                        o += '## ' + res.name;
+                        o += '## [' + p2[0] + " - " + res.name + "](" + url + ")";
                         o += '\n\n### 题意\n\n' + res.statements[0].legend;
                         o += '\n\n### 解法\n\n\n\n### 代码\n\n```cpp\n```\n\n';
                     }
@@ -619,4 +670,3 @@ function fun() {
 (function () {
     fun();
 })();
-
