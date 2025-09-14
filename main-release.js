@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         517Coding better Release!
 // @namespace    https://github.com/qqaawwssee/517Better
-// @version      0.1.1
+// @version      0.1.2
 // @description  517OJ 美化+工具拓展插件
 // @author       HUFT
 // @match        https://www.517coding.com/*
@@ -177,7 +177,6 @@ pre .language-cpp {
 }
 
 @media (min-width: 1400px) {
-
     .container,
     .container-lg,
     .container-md,
@@ -185,6 +184,9 @@ pre .language-cpp {
     .container-xl,
     .container-xxl {
         max-width: 1320px
+    }
+    .Beg2ct{
+        
     }
 }
 
@@ -274,11 +276,11 @@ pre .language-cpp {
 }
 
 .problem_container__tWXAL .arco-col-4 {
-    float: right;
-    position: absolute;
-    right: calc(-270px + 50px);
+    /*float: right;*/
+    position: sticky;
+    /*right: calc(-270px + 50px);*/
     width: calc(270px + 17px);
-    background: rgb(from var(--color-bg-2) r g b / 70%);
+    background: rgb(from var(--color-bg-2) r g b / 90%);
     transition: 0.2s;
     border: 1px solid var(--color-border);
     border-top-left-radius: 17px;
@@ -287,10 +289,13 @@ pre .language-cpp {
     backdrop-filter: blur(12px);
     transition-delay: 0.06s;
     top: 8px;
+    /*transition-property: right;*/
+    margin-top: 8px;
+    margin-left: 12px;
 
     .arco-list-item-action {
         transform: scale(1.2);
-        transition: 0.2s;
+        transition: 0.1s;
         transition-delay: 0.06s;
         position: relative;
         left: calc(-100%);
@@ -302,7 +307,7 @@ pre .language-cpp {
 .arco-btn.arco-btn-text.arco-btn-size-small.arco-btn-shape-square .arco-typography {
     svg {
         position: fixed;
-        transition: 0.2s;
+        transition: 0.1s;
         transition-delay: 0.06s;
         left: 20px;
         transform: translate(0px, 3px) scale(1.25);
@@ -310,7 +315,8 @@ pre .language-cpp {
 }
 
 .problem_container__tWXAL .arco-col-4:hover {
-    right: 0%;
+    /*right: 0%;*/
+    transform: translate(-229px, 0px);
     padding-left: 8px;
 
     .arco-btn.arco-btn-text.arco-btn-size-small.arco-btn-shape-square .arco-typography svg {
@@ -427,7 +433,7 @@ pre .language-cpp {
 }
 
 .problem_container__tWXAL .arco-row-justify-start .arco-col-20 {
-    width: calc(100% - 70px) !important;
+    width: calc(100% - 570px) !important;
 }
 
 .arco-col.arco-col-4 a .arco-typography {
@@ -478,7 +484,24 @@ td:nth-child(5){
     }
 }
     }
-.
+
+.problem_container__tWXAL {
+    overflow: clip;
+}
+
+.problem_container__tWXAL .arco-row.arco-row-align-start.arco-row-justify-start {
+    overflow: unset !important;
+    width: calc(100% + 500px);
+}
+
+
+
+
+
+
+
+
+
     `)
 }
 
@@ -488,6 +511,11 @@ function for_main_website() {
         //setTimeout(() => sidebar(), 1000);
         //fix_title();
     })
+    //window.onscroll = function () {
+    //var t = document.getElementsByClassName("arco-col arco-col-4")[0];
+    //if (document.getElementsByClassName("arco-col arco-col-24")[0].getBoundingClientRect().top < 0) t.style.position = "fixed";
+    //else t.style.position = "absolute";
+    //}
     $(document).ready(function () {
         //headbar();
         logo();
@@ -670,4 +698,3 @@ function fun() {
 (function () {
     fun();
 })();
-
