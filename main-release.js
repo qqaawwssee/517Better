@@ -316,6 +316,7 @@ pre .language-cpp {
 
 .problem_container__tWXAL .arco-col-4:hover {
     /*right: 0%;*/
+	/*https://github.com/qqaawwssee/517Better*/
     transform: translate(-229px, 0px);
     padding-left: 8px;
 
@@ -506,6 +507,7 @@ td:nth-child(5){
 }
 
 function for_main_website() {
+	//https://github.com/qqaawwssee/517Better
     add_css();
     $(document).ready(function () {
         //setTimeout(() => sidebar(), 1000);
@@ -698,3 +700,4 @@ function fun() {
 (function () {
     fun();
 })();
+
