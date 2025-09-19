@@ -186,7 +186,7 @@ pre .language-cpp {
         max-width: 1320px
     }
     .Beg2ct{
-        
+
     }
 }
 
@@ -490,7 +490,7 @@ td:nth-child(5){
     overflow: clip;
 }
 
-.problem_container__tWXAL .arco-row.arco-row-align-start.arco-row-justify-start {
+.problem_container__tWXAL > .arco-row.arco-row-align-start.arco-row-justify-start {
     overflow: unset !important;
     width: calc(100% + 500px);
 }
@@ -507,7 +507,7 @@ td:nth-child(5){
 }
 
 function for_main_website() {
-	//https://github.com/qqaawwssee/517Better
+    //https://github.com/qqaawwssee/517Better
     add_css();
     $(document).ready(function () {
         //setTimeout(() => sidebar(), 1000);
