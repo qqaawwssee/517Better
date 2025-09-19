@@ -2,6 +2,8 @@
 
 ### 使用方法
 
+**适用于带www的517coding网址，不带www的没做适配**
+
 把`main-release.js`添加到`Tampermonkey`就可以了，或者是[安装](https://www.tampermonkey.net/script_installation.php#url=https://github.com/qqaawwssee/517Better/raw/main/main-release.js)
 
 在`Windows11 Edge Tampermonkey5.3.3`上测试正常，不保证其他浏览器不会出错
