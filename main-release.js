@@ -306,11 +306,11 @@ pre .language-cpp {
 
 .arco-btn.arco-btn-text.arco-btn-size-small.arco-btn-shape-square .arco-typography {
     svg {
-        position: fixed;
+        /*position: fixed;*/
         transition: 0.1s;
         transition-delay: 0.06s;
         left: 20px;
-        transform: translate(0px, 3px) scale(1.25);
+        transform: translate(-90px, 3px) scale(1.25);
     }
 }
 
@@ -321,8 +321,8 @@ pre .language-cpp {
     padding-left: 8px;
 
     .arco-btn.arco-btn-text.arco-btn-size-small.arco-btn-shape-square .arco-typography svg {
-        position: unset;
-        left: unset;
+        /*position: unset;*/
+        /*left: unset;*/
         transform: translate(0px, 0px);
     }
 
@@ -332,6 +332,9 @@ pre .language-cpp {
     }
 }
 
+.problem_container__tWXAL .arco-list.arco-list-small.arco-list-no-border.mt-5 .arco-list-item-main {
+    overflow: visible;
+}
 
 .index_sample-test__0H_7y pre {
     font-family: Consolas;
