@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         517Coding better Release!
 // @namespace    https://github.com/qqaawwssee/517Better
-// @version      0.1.2
+// @version      0.1.3
 // @description  517OJ 美化+工具拓展插件
 // @author       HUFT
 // @match        https://www.517coding.com/*
@@ -310,7 +310,7 @@ pre .language-cpp {
         transition: 0.1s;
         transition-delay: 0.06s;
         left: 20px;
-        transform: translate(-90px, 3px) scale(1.25);
+        transform: translate(-90px, 0px) scale(1.25);
     }
 }
 
@@ -498,10 +498,62 @@ td:nth-child(5){
     width: calc(100% + 500px);
 }
 
+.checking{
 
+}
 
+.checking_element {
+    min-width: 240px;
+    height: 70px;
+    background: var(--color-bg-1);
+    border-radius: 10px;
+    border: 2px solid var(--color-border);
+    animation: checking-fadeinleft 1s 0s;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    opacity: 0.7;
+}
 
+.checking_element_in{
+    display: flex;
+    flex-direction: row;
+}
 
+.editor_footer__7bELm span .arco-btn.arco-btn-dashed.arco-btn-size-default.arco-btn-shape-square{
+    display: none;
+}
+
+@keyframes checking-fadeinleft{
+    0%{
+        opacity: 0;
+        transform: translate(-1000px, 0px);
+    }
+    100%{
+        opacity: 0.7;
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes checking-fadeoutleft{
+    0%{
+        opacity: 0.7;
+        transform: translate(0px, 0px);
+    }
+    100%{
+        opacity: 0;
+        transform: translate(-1000px, 0px);
+        height: 0;
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.checking-fadeout{
+    animation: checking-fadeoutleft 0.7s 0s;
+    animation-fill-mode: forwards;
+}
 
 
 
@@ -509,10 +561,191 @@ td:nth-child(5){
     `)
 }
 
+//const map = new Map();
+
+/*-------------------------------------------------------*/
+
+function myfetch(url) {
+    return fetch(url, { "headers": { "accept": "application/json, text/plain, */*", "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6", "authorization": "Bearer " + localStorage.getItem("token"), "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"Windows\"", "sec-fetch-dest": "empty", "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin" }, "referrer": "https://www.517coding.com/contests/2386/problem/A", "body": null, "method": "GET", "mode": "cors", "credentials": "include" });
+}
+
+function change_test_status(data) {
+    var rr = document.getElementById(`Test-${data.message.sid}`);
+    var r = rr.getElementsByClassName("checking-which")[1];
+    if (data.message.status == "done") {
+        myfetch("https://www.517coding.com/api/submissions/" + data.message.sid).then(res => res.json()).then(res => {
+            if (res.verdict == 4) {
+                r.classList.add("arco-typography-success");
+                r.innerText = "通过";
+            }
+            else {
+                r.classList.add("arco-typography-error");
+                r.innerText = "未通过";
+            }
+            setTimeout(() => {
+                rr.classList.add("checking-fadeout");
+                setTimeout(() => {
+                    rr.remove();
+                }, 700);
+            }, 3000);
+        })
+    }
+    else r.innerText = data.message.message;
+}
+
+var getting = 0;
+
+function TakeAwayTheStatusWebSocket_assist() {
+    const ws = window.WebSocket;
+    window.WebSocket = function (url, protocols) {
+        const wsss = new ws(url, protocols);
+        if (url.match(/wss:\/\/www.517coding.com\/api\/ws\?uid=[0-9]+/g) != null) {
+            outlog("WebSocket Message: Got");
+            wsss.addEventListener('message', function (event) {
+                outlog("WebSocket Message: " + event.data);
+                if (event.data == "") return;
+                let data = JSON.parse(event.data);
+                if (document.getElementById(`Test-${data.message.sid}`) == null) {
+                    if (data.message.status == "done") return;
+                    if (getting == 1) return;
+                    getting = 1;
+                    myfetch("https://www.517coding.com/api/submissions/" + data.message.sid).then(res => res.json()).then(res => {
+                        getting = 0;
+                        var container3 = document.getElementById("Checking");
+                        var div = `
+    <div class="checking_element" id="Test-${data.message.sid}">
+        <div class="arco-typography checking_element_in">正在评测：
+            <div class="checking-which">${res.problemName}</div>
+        </div>
+        <div class="arco-typography checking_element_in">评测状态：
+            <div class="checking-which"></div>
+        </div>
+    </div>
+        `
+                        container3.insertAdjacentHTML('beforeend', div);
+                        change_test_status(data);
+                    })
+                }
+                else change_test_status(data);
+            });
+        }
+        return wsss;
+    }
+}
+
+/*-------------------------------------------------------*/
+
+function TakeAwayTheStatusWebSocket() {
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.innerHTML = `
+function outlog(a) {
+    console.log("517Coding Better log: " + a);
+}
+function myfetch(url) {
+    return fetch(url, { \"headers\": { \"accept\": \"application\/json, text\/plain, *\/*\", \"accept-language\": \"zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6\", \"authorization\": \"Bearer \" + localStorage.getItem(\"token\"), \"sec-ch-ua\": \"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Microsoft Edge\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\", \"sec-ch-ua-mobile\": \"?0\", \"sec-ch-ua-platform\": \"\\\"Windows\\\"\", \"sec-fetch-dest\": \"empty\", \"sec-fetch-mode\": \"cors\", \"sec-fetch-site\": \"same-origin\" }, \"referrer\": \"https:\/\/www.517coding.com\/contests\/2386\/problem\/A\", \"body\": null, \"method\": \"GET\", \"mode\": \"cors\", \"credentials\": \"include\" });
+}
+
+function change_test_status(data) {
+    var rr = document.getElementById(\`Test-\${data.message.sid}\`);
+    var r = rr.getElementsByClassName(\"checking-which\")[1];
+    if (data.message.status == \"done\") {
+        myfetch(\"https:\/\/www.517coding.com\/api\/submissions\/\" + data.message.sid).then(res => res.json()).then(res => {
+            if (res.verdict == 4) {
+                r.classList.add(\"arco-typography-success\");
+                r.innerText = \"通过\";
+            }
+            else {
+                r.classList.add(\"arco-typography-error\");
+                r.innerText = \"未通过\";
+            }
+            setTimeout(() => {
+                rr.classList.add(\"checking-fadeout\");
+                setTimeout(() => {
+                    rr.remove();
+                }, 700);
+            }, 3000);
+        })
+    }
+    else r.innerText = data.message.message;
+}
+
+var getting = 0;
+
+function TakeAwayTheStatusWebSocket_assist() {
+    const ws = window.WebSocket;
+    window.WebSocket = function (url, protocols) {
+        const wsss = new ws(url, protocols);
+        if (url.match(\/wss:\\\/\\\/www.517coding.com\\\/api\\\/ws\\?uid=[0-9]+\/g) != null) {
+            outlog("WebSocket Message: Got");
+            wsss.addEventListener(\'message\', function (event) {
+                outlog(\"WebSocket Message: \" + event.data);
+                if (event.data == \"\") return;
+                let data = JSON.parse(event.data);
+                if (document.getElementById(\`Test-\${data.message.sid}\`) == null) {
+                    if (data.message.status == \"done\") return;
+                    if (getting == 1) return;
+                    getting = 1;
+                    myfetch(\"https:\/\/www.517coding.com\/api\/submissions\/\" + data.message.sid).then(res => res.json()).then(res => {
+                        getting = 0;
+                        var container3 = document.getElementById(\"Checking\");
+                        var div = \`
+    <div class=\"checking_element\" id=\"Test-\${data.message.sid}\">
+        <div class=\"arco-typography checking_element_in\">正在评测：
+            <div class=\"checking-which\">\${res.problemName}<\/div>
+        <\/div>
+        <div class=\"arco-typography checking_element_in\">评测状态：
+            <div class=\"checking-which\"><\/div>
+        <\/div>
+    <\/div>
+       \`
+                        container3.insertAdjacentHTML(\'beforeend\', div);
+                        change_test_status(data);
+                    })
+                }
+                else change_test_status(data);
+            });
+        }
+        return wsss;
+    }
+}
+    TakeAwayTheStatusWebSocket_assist();
+    `;
+    document.head.appendChild(script);
+}
+
 function for_main_website() {
     //https://github.com/qqaawwssee/517Better
     add_css();
     $(document).ready(function () {
+        if (GM_getValue("TakeAwayTheStatusWebSocket", 0x7755) == 0x7755) GM_setValue("TakeAwayTheStatusWebSocket", 0);
+        if (GM_getValue("TakeAwayTheStatusWebSocket") == 1) {
+            var container3 = document.body;
+            var div = `
+<div id="Checking" class="checking" role="alert" style="position: fixed;top: 10px;left: 10px;
+">
+</div>
+        `
+            container3.insertAdjacentHTML('beforeend', div);
+            TakeAwayTheStatusWebSocket();
+            //var weee;
+            //myfetch("https://www.517coding.com/api/user/info").then(res => res.json()).then(res => {
+            //    weee = new WebSocket("wss://www.517coding.com/api/ws?uid=" + res.id);
+            //
+            //})
+        }
+        if (GM_getValue("TakeAwayTheStatusWebSocket") == 1) {
+            GM_registerMenuCommand("关闭接管提交信息（将自动刷新）", () => {
+                GM_setValue("TakeAwayTheStatusWebSocket", 0);
+                window.location.reload();
+            })
+        }
+        else {
+            GM_registerMenuCommand("接管提交信息（将自动刷新）", () => {
+                GM_setValue("TakeAwayTheStatusWebSocket", 1);
+                window.location.reload();
+            })
+        }
         //setTimeout(() => sidebar(), 1000);
         //fix_title();
     })
@@ -613,7 +846,7 @@ function for_main_website() {
                 let p = url.match(/[0-9]+\//g);
                 let p2 = url.match(/[A-Z]/g);
                 //p2[0][0] = (Number)(p2[0][0] - 'A');
-                fetch("https://www.517coding.com/api/contests/" + p[0] + "problems/" + (p2[0].charCodeAt(0) - 65), { "headers": { "accept": "application/json, text/plain, */*", "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6", "authorization": "Bearer " + localStorage.getItem("token"), "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"Windows\"", "sec-fetch-dest": "empty", "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin" }, "referrer": "https://www.517coding.com/", "body": null, "method": "GET", "mode": "cors", "credentials": "include" }).then(res => res.json()).then(res => {
+                myfetch("https://www.517coding.com/api/contests/" + p[0] + "problems/" + (p2[0].charCodeAt(0) - 65)).then(res => res.json()).then(res => {
                     let o = '';
                     if (typee == 1) {                //详细的
                         o += '#### [' + p2[0] + " - " + res.name + "](" + url + ")";
@@ -703,4 +936,3 @@ function fun() {
 (function () {
     fun();
 })();
-
