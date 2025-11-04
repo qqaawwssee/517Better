@@ -915,8 +915,7 @@ function for_main_website() {
                     let o = '';
                     if (typee == 1) {                //详细的
                         o += '#### [' + p2[0] + " - " + res.name + "](" + url + ")";
-                        o += '\n\n##### 题目描述：\n\n' + res.statements[0].legend;
-                        if (res.statements[0].note != '') o += '\n\n##### 数据范围/提示：\n\n' + res.statements[0].note;
+                        o += '\n\n##### 题目描述：\n\n' + res.statements[0].legend;                        
                     }
                     else if (typee == 2) {
                         o += '### 题意：\n\n' + res.statements[0].legend;
@@ -1001,3 +1000,4 @@ function fun() {
 (function () {
     fun();
 })();
+
