@@ -191,7 +191,7 @@ pre .language-cpp {
         max-width: 1320px
     }
     .Beg2ct{
-        
+
     }
 }
 
@@ -516,7 +516,7 @@ td:nth-child(5){
 }
 
 .checking{
-    
+
 }
 
 .checking_element {
@@ -855,90 +855,6 @@ function for_main_website() {
                 let content = element.innerHTML;
                 GM_openInTab("https://discuss.517coding.com/?q=" + content.substring(4, content.length), { active: true, insert: true, setParent: true });
             }
-
-
-            var container3 = document.body;
-            //if (container1.length == 0) return;   viewBox="0 0 1000 1000"
-            var div = `
-<div id="gotowww222" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert" style="bottom: 150px;">
-	<div>        <svg viewBox="0 0 28 28" class="arco-icon arco-icon-heart" style="
-    height: 26px;
-    width: 26px;
-">        <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0; color: var(--color-text-1)"id="gotowww222a">简化</text> <text y="26" style="font-size: 14px; transition: 0.2s; opacity: 0; color: var(--color-text-1)" id="gotowww222c">总结</text>   <path xmlns="http://www.w3.org/2000/svg" d="M 2.56 20.48 L 2.56 10.24 L 5.12 10.24 L 8.96 14.08 L 12.8 10.24 L 15.36 10.24 L 15.36 20.48 L 12.8 20.48 L 12.8 13.8624 L 8.96 17.7024 L 5.12 13.8624 L 5.12 20.48 L 2.56 20.48 M 20.48 10.24 L 24.32 10.24 L 24.32 15.36 L 27.52 15.36 L 22.4 21.12 L 17.28 15.36 L 20.48 15.36 L 20.48 10.24 Z" stroke="var(--color-text-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: 0.2s; fill: none;" id="gotowww222b">        </svg>    </div></div>`;
-            container3.insertAdjacentHTML('beforeend', div);
-            var btn = document.getElementById("gotowww222");
-            var typee = 1;
-            if (GM_getValue("CopyMarkdownType", 0x7755) == 0x7755) GM_setValue("CopyMarkdownType", 0);
-            while (typee != GM_getValue("CopyMarkdownType")) {
-                if (typee == 1) {
-                    document.getElementById("gotowww222a").style.opacity = "";
-                    document.getElementById("gotowww222b").style.transform = "translate(0px, -9px)";
-                    typee = 2;
-                }
-                else if (typee == 2) {
-                    document.getElementById("gotowww222a").style.opacity = "0";
-                    document.getElementById("gotowww222c").style.opacity = "";
-                    typee = 0;
-                }
-                else {
-                    document.getElementById("gotowww222c").style.opacity = "0";
-                    document.getElementById("gotowww222b").style.transform = "";
-                    typee = 1;
-                }
-            }
-            btn.addEventListener('contextmenu', function (event) {
-                event.preventDefault();
-                if (typee == 1) {
-                    document.getElementById("gotowww222a").style.opacity = "";
-                    document.getElementById("gotowww222b").style.transform = "translate(0px, -9px)";
-                    typee = 2;
-                }
-                else if (typee == 2) {
-                    document.getElementById("gotowww222a").style.opacity = "0";
-                    document.getElementById("gotowww222c").style.opacity = "";
-                    typee = 0;
-                }
-                else {
-                    document.getElementById("gotowww222c").style.opacity = "0";
-                    document.getElementById("gotowww222b").style.transform = "";
-                    typee = 1;
-                }
-                GM_setValue("CopyMarkdownType", typee)
-            });
-
-            btn.onclick = function () {
-                let url = window.location.href;
-                let p = url.match(/[0-9]+\//g);
-                let p2 = url.match(/[A-Z]/g);
-                //p2[0][0] = (Number)(p2[0][0] - 'A');
-                myfetch("https://www.517coding.com/api/contests/" + p[0] + "problems/" + (p2[0].charCodeAt(0) - 65)).then(res => res.json()).then(res => {
-                    let o = '';
-                    if (typee == 1) {                //详细的
-                        o += '#### [' + p2[0] + " - " + res.name + "](" + url + ")";
-                        o += '\n\n##### 题目描述：\n\n' + res.statements[0].legend;                        
-                    }
-                    else if (typee == 2) {
-                        o += '### 题意：\n\n' + res.statements[0].legend;
-                    }
-                    else {
-                        o += '## [' + p2[0] + " - " + res.name + "](" + url + ")";
-                        o += '\n\n### 题意\n\n' + res.statements[0].legend;
-                        o += '\n\n### 解法\n\n\n\n### 代码\n\n```cpp\n```\n\n';
-                    }
-
-                    navigator.clipboard.writeText(o).then(() => {
-                        outlog("Copy markdown Successfully");
-                        document.getElementById("gotowww222").style.backgroundColor = "rgb(197 255 220 / 70%)";
-                        document.getElementById("gotowww222").style.height = "145px";
-                        setTimeout(() => {
-                            document.getElementById("gotowww222").style.backgroundColor = "";
-                            document.getElementById("gotowww222").style.height = ""
-                        }, 1500)
-                    }).catch(err => {
-                        console.log("517coding Better log: " + "Copy markdown unsuccessfully", err)
-                    });
-                })
-            }
         }
 
 
@@ -1000,4 +916,5 @@ function fun() {
 (function () {
     fun();
 })();
+
 
