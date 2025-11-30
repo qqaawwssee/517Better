@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         517Coding better Release!
 // @namespace    https://github.com/qqaawwssee/517Better
-// @version      0.1.3
+// @version      0.1.4
 // @description  517OJ 美化+工具拓展插件
 // @author       HUFT
 // @match        https://www.517coding.com/*
@@ -220,16 +220,15 @@ pre .language-cpp {
     font-size: large;
     border: 4px solid var(--color-border-1);
     box-sizing: content-box;
-    bottom: 60px;
-    position: fixed;
     width: fit-content;
     border-radius: 5px;
-    right: 30px;
-    z-index: 9999;
     width: 26px;
     height: 26px;
     padding: 7px;
+    margin-left: auto;
     transition: 0.2s;
+    margin-bottom: 10px;
+    transition-delay: 0.03s;
 }
 
 .gotowww2:hover {
@@ -245,7 +244,7 @@ pre .language-cpp {
 }
 
 ::-webkit-scrollbar-track {
-    border-radius: 5px;
+    /*border-radius: 5px;*/
 }
 
 .editor_footer__PdYnR {
@@ -281,6 +280,8 @@ pre .language-cpp {
 }
 
 .problem_container__tWXAL .arco-col-4 {
+    max-height: 60vh;
+    overflow: auto;
     /*float: right;*/
     position: sticky;
     /*right: calc(-270px + 50px);*/
@@ -572,8 +573,30 @@ td:nth-child(5){
     animation-fill-mode: forwards;
 }
 
+#gotowww2222:hover {
+    width: 190px;
+}
 
+.gotowww2222-working {
+    border: 4px solid rgb(var(--green-2));
+}
 
+.gotowww2222-pausing {
+    border: 4px solid rgb(var(--gold-3));
+}
+
+.gotowww2222-stopped {
+    border: 4px solid rgb(var(--red-3));
+    width: 190px !important;
+}
+
+#btn11:hover {
+    background: var(--color-success-light-1) !important;
+}
+
+#btn22:hover {
+    background: var(--color-success-light-1) !important;
+}
 
     `)
 }
@@ -602,6 +625,13 @@ function change_test_status(data) {
             else if (res.verdict == 4) {
                 r.classList.add("arco-typography-success");
                 r.innerText = "回答正确";
+                var bn = document.getElementById("gotowww2222");
+                if (bn.classList.contains("gotowww2222-working") || bn.classList.contains("gotowww2222-pausing")) {
+                    bn.classList.add("gotowww2222-stopped");
+                    setTimeout(() => {
+                        bn.classList.remove("gotowww2222-stopped");
+                    }, 5000);
+                }
             }
             else if (res.verdict == 5) {
                 r.classList.add("arco-typography-warning");
@@ -703,6 +733,13 @@ function change_test_status(data) {
             else if (res.verdict == 4) {
                 r.classList.add("arco-typography-success");
                 r.innerText = "回答正确";
+                var bn = document.getElementById("gotowww2222");
+                if (bn.classList.contains("gotowww2222-working") || bn.classList.contains("gotowww2222-pausing")) {
+                    bn.classList.add("gotowww2222-stopped");
+                    setTimeout(() => {
+                        bn.classList.remove("gotowww2222-stopped");
+                    }, 5000);
+                }
             }
             else if (res.verdict == 5) {
                 r.classList.add("arco-typography-warning");
@@ -822,42 +859,139 @@ function for_main_website() {
     $(document).ready(function () {
         //headbar();
         logo();
-        var container1 = document.body;
+        var container111 = document.body;
+        var div = `
+        <div id="gt" style="position: fixed;bottom: 25px;z-index: 9999;right: 30px;"></div>
+`;
+        container111.insertAdjacentHTML('beforeend', div);
+
+        var container1 = document.getElementById("gt");
         //if (container1.length == 0) return;   viewBox="0 0 1000 1000"
         var div = `
-<div id="gotowww" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert" style="bottom: 30px;">
+<div id="gotowww" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert">
 	<div>        <svg viewBox="0 0 24 24" class="arco-icon arco-icon-heart" style="
     height: 26px;
     width: 26px;
     fill: var(--color-text-1);
 " stroke-width="0">            <path xmlns="http://www.w3.org/2000/svg" d="M14 22.5L11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2L14 22.5zm1.839-5.5H21V8.103H7V17H12.161L14 19.298 15.839 17zM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1z"/>        </svg>    </div></div>`;
-        container1.insertAdjacentHTML('beforeend', div);
+        container1.insertAdjacentHTML('afterbegin', div);
         var btn = document.getElementById("gotowww");
         btn.onclick = function () {
             GM_openInTab("https://discuss.517coding.com/", { active: true, insert: true, setParent: true });
         }
 
         if (window.location.href.match(/https:\/\/www.517coding.com\/contests\/[0-9]+\/problem\/[A-Z]/g) != null) {
-            var container2 = document.body;
             //if (container1.length == 0) return;   viewBox="0 0 1000 1000"
             var div = `
-<div id="gotowww22" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert" style="bottom: 90px;">
+<div id="gotowww22" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert">
 	<div>        <svg viewBox="0 0 24 24" class="arco-icon arco-icon-heart" style="
     height: 26px;
     width: 26px;
 ">            <path xmlns="http://www.w3.org/2000/svg" d="M11 6C13.7 6 16 8.2 16 11M16.6 16.6L21 21M19 11C19 15.4 15.4 19 11 19C6.5 19 3 15.4 3 11C3 6.5 6.5 3 11 3C15.4 3 19 6.5 19 11Z" stroke="var(--color-text-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="
     fill: none;
 "/>        </svg>    </div></div>`;
-            container2.insertAdjacentHTML('beforeend', div);
+            container1.insertAdjacentHTML('afterbegin', div);
             var btn = document.getElementById("gotowww22");
             btn.onclick = function () {
                 let element = document.querySelector('.problem_title__WpDgK');
                 let content = element.innerHTML;
                 GM_openInTab("https://discuss.517coding.com/?q=" + content.substring(4, content.length), { active: true, insert: true, setParent: true });
             }
+
+            var div = `
+<div id="gotowww2222" class="gotowww2 arco-alert arco-alert-info arco-alert-with-title" role="alert" style="/* bottom: 150px; */"><div style="
+ display: flex;
+align-items: center;
+align-self: center;
+">        <svg viewBox=" 0 0 24 24" class=" arco-icon arco-icon-heart" style="
+height: 26px;
+width: 26px;
+fill: var(--color-text-1);
+" stroke-width=" 0">            <path xmlns=" http: //www.w3.org/2000/svg" d="M15 1H9v2h6zm-4 13h2V8h-2zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.96 8.96 0 0 0 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9a8.994 8.994 0 0 0 7.03-14.61M12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7s7 3.13 7 7s-3.13 7-7 7"></path>        </svg>  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-left: 8px;border: 3px solid var(--color-border-3);border-radius: 10px;background: var(--color-bg-1);transition: 0.2s;" id="btn11"><path fill=" currentColor" d=" M6.575 15.1q-.5.35-1.037.063T5 14.275v-4.55q0-.6.538-.887t1.037.062l3.25 2.275q.425.3.425.825t-.425.825zM14 16q-.425 0-.712-.288T13 15V9q0-.425.288-.712T14 8t.713.288T15 9v6q0 .425-.288.713T14 16m4 0q-.425 0-.712-.288T17 15V9q0-.425.288-.712T18 8t.713.288T19 9v6q0 .425-.288.713T18 16" style="
+    color: var(--color-text-1);
+"></path></svg><svg xmlns=" http: //www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" style="margin-left: 4px;border: 3px solid var(--color-border-3);border-radius: 10px;padding: 3px;background: var(--color-bg-1);transition: 0.2s;" id="btn22"><path fill=" currentColor" fill-rule=" evenodd" d=" M20.75 12a8.7 8.7 0 0 1-1.858 5.392L17.5 16l-1 1v4.5H21l1-1l-1.33-1.33A11.2 11.2 0 0 0 23.25 12C23.25 5.787 18.213.75 12 .75S.75 5.787.75 12S5.787 23.25 12 23.25q1.155-.002 2.249-.225l-.498-2.45A8.75 8.75 0 1 1 20.75 12M13 6.5v6l-.4.3l-4 3l-1.2-1.6l3.6-2.7v-5z" clip-rule=" evenodd" style="
+    color: var(--color-text-1);
+"></path></svg><span id="tlabel" style="font-size: 19px;color:var(--color-text-1);min-width:72px;padding-left: 4px;/* border-left: 3px solid var(--color-border-3); */margin-left: 4px;font-family: Consolas;">00:00:00</span>  </div></div>
+            `;
+            container1.insertAdjacentHTML('afterbegin', div);
+            var btn11 = document.getElementById("btn11");
+            var btn22 = document.getElementById("btn22");
+            var bn = document.getElementById("gotowww2222");
+            var c = null;
+            var onn = 2;
+            function m(x) {
+                var H = Math.floor(x / 3600), M = Math.floor(x / 60) % 60, S = x % 60;
+                return String(H).padStart(2, '0') + ':' + String(M).padStart(2, '0') + ':' + String(S).padStart(2, '0');
+            }
+            addEventListener("")
+            btn11.onclick = function () {
+                if (onn != 1) {
+                    if (bn.classList.contains("gotowww2222-pausing")) {
+                        bn.classList.remove("gotowww2222-pausing");
+                    }
+                    if (!bn.classList.contains("gotowww2222-working")) {
+                        bn.classList.add("gotowww2222-working");
+                    }
+                    c = setInterval(() => {
+                        if (bn.classList.contains("gotowww2222-stopped")) {
+                            if (bn.classList.contains("gotowww2222-working")) {
+                                bn.classList.remove("gotowww2222-working");
+                            }
+                            if (!bn.classList.contains("gotowww2222-pausing")) {
+                                bn.classList.add("gotowww2222-pausing");
+                            }
+                            onn = 0;
+                            clearInterval(c);
+                            c = null;
+                            return;
+                        }
+                        let tlabel = document.getElementById("tlabel");
+                        let arr = tlabel.innerText.split(":");
+                        let total = parseInt(arr[0]) * 3600 + parseInt(arr[1]) * 60 + parseInt(arr[2]);
+                        total++;
+                        tlabel.innerText = m(total);
+                    }, 1000);
+                    onn = 1;
+                }
+                else if (document.getElementById("tlabel").innerText == "00:00:00") {
+                    if (bn.classList.contains("gotowww2222-working")) {
+                        bn.classList.remove("gotowww2222-working");
+                    }
+                    if (bn.classList.contains("gotowww2222-working")) {
+                        bn.classList.remove("gotowww2222-working");
+                    }
+                    clearInterval(c);
+                    c = null;
+                    onn = 2;
+                }
+                else {
+                    if (bn.classList.contains("gotowww2222-working")) {
+                        bn.classList.remove("gotowww2222-working");
+                    }
+                    if (!bn.classList.contains("gotowww2222-pausing")) {
+                        bn.classList.add("gotowww2222-pausing");
+                    }
+                    clearInterval(c);
+                    c = null;
+                    onn = 0;
+                }
+            }
+            btn22.onclick = function () {
+                let tlabel = document.getElementById("tlabel");
+                tlabel.innerText = "00:00:00";
+                if (c != null) {
+                    clearInterval(c);
+                    c = null;
+                    onn = 0;
+                }
+                if (bn.classList.contains("gotowww2222-pausing")) {
+                    bn.classList.remove("gotowww2222-pausing");
+                }
+                if (bn.classList.contains("gotowww2222-working")) {
+                    bn.classList.remove("gotowww2222-working");
+                }
+            }
         }
-
-
     })
 }
 
@@ -916,5 +1050,4 @@ function fun() {
 (function () {
     fun();
 })();
-
 
