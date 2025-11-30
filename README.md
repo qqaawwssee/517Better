@@ -41,3 +41,5 @@ Pull Requests 和 Issues 也不会总看
 ### 其他
 
 使用`JQuery`
+
+VScode 自动补全还是太强了
